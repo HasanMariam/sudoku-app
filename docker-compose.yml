@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  database:
+    image: mongo:latest
+    container_name: sudoku-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: ./backend
+    container_name: sudoku-api
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+    environment:
+      - MONGO_URI=mongodb://database:27017/sudoku_db
+
+  frontend:
+      build: ./frontend
+      ports:
+        - "80:80" 
+      environment:
+        - VITE_API_URL=http://192.168.2.123:5000/api
+      depends_on:
+        - backend
+
+volumes:
+  mongo-data:
