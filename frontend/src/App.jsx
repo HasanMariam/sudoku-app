@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './App.css';
 
-// Using your local IP for network access
-const API_BASE_URL = "http://192.168.2.123:5000/api";
+
+const API_BASE_URL = "/api";
 
 function App() {
   const [grid, setGrid] = useState(Array(9).fill(null).map(() => Array(9).fill({ value: 0, isOriginal: false })));

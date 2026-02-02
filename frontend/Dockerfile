@@ -1,4 +1,4 @@
-# Stage 1: Build the React app
+# Stage 1: Build the React application
 FROM node:18-alpine AS build-stage
 WORKDIR /app
 COPY package*.json ./
@@ -6,10 +6,31 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Stage 2: Serve with Nginx
+# Stage 2: Serve the app using Nginx
 FROM nginx:stable-alpine
-# Copy the build output to Nginx's default directory
-# Make sure there is a space after --from=build-stage
+
+# Set up the proxy without the trailing slash to preserve the exact path
+RUN printf 'server {\n\
+    listen 80;\n\
+    location / {\n\
+        root /usr/share/nginx/html;\n\
+        index index.html index.htm;\n\
+        try_files $uri $uri/ /index.html;\n\
+    }\n\
+    location /api/ {\n\
+        proxy_pass http://backend:5000;\n\
+        proxy_http_version 1.1;\n\
+        proxy_set_header Upgrade $http_upgrade;\n\
+        proxy_set_header Connection "upgrade";\n\
+        proxy_set_header Host $host;\n\
+        proxy_cache_bypass $http_upgrade;\n\
+    }\n\
+}' > /etc/nginx/conf.d/default.conf
+
+# Copy build files from build-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
+
 EXPOSE 80
+
+# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
