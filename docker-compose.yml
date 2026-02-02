@@ -11,11 +11,11 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI=mongodb://mongo:27017/sudoku
+      - REDIS_URL=redis://redis:6379
     depends_on:
-      - mongo
+      - redis
 
-  mongo:
-    image: mongo:latest
+  redis:
+    image: redis:alpine:latest
     ports:
-      - "27017:27017"
+      - "6379:6379"
