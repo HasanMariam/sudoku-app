@@ -1,5 +1,6 @@
 services:
   frontend:
+    # platform: linux/amd64
     image: hasanmar/sudoku-frontend:latest
     ports:
       - "80:80"
@@ -7,9 +8,10 @@ services:
       - backend
 
   backend:
+    # platform: linux/amd64  
     image: hasanmar/sudoku-backend:latest
     ports:
-      - "5000:5000"
+      - "5001:5000"
     environment:
       - REDIS_URL=redis://redis:6379
     depends_on:

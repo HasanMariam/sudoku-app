@@ -31,25 +31,30 @@ You don't need to install Node.js or MongoDB locally. You only need
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/HasanMariam/sudoku-app.git](https://github.com/HasanMariam/sudoku-app.git)
+    git clone https://github.com/HasanMariam/sudoku-app.git
     cd sudoku-app
     ```
 
 **Using Docker**
 2.  **Run the application:**
-    ```bash
+    ```
     docker-compose up -d
     ```
 
 3.  **Access the game:**
     Open your browser and go to `http://localhost`.
 
+
 **Using Kubernetes**
 2. **Deploy the unified cluster manifest**
-kubectl apply -f sudoku-all.yaml
+    ```
+    kubectl apply -f sudoku-all.yaml
+    ```
 
 3. **Attaching a service to the front-end of the deployment**
-minikube service frontend-service   
+    ```
+    minikube service frontend-service   
+    ```
 
 ## 📂 Project Structure
 ```text
