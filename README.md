@@ -33,6 +33,7 @@ You don't need to install Node.js or MongoDB locally. You only need
     ```bash
     git clone https://github.com/HasanMariam/sudoku-app.git
     ```
+    ```bash
     cd sudoku-app
     ```
 
