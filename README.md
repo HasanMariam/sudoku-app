@@ -18,7 +18,7 @@ I engineered this project as a modern microservices architecture:
 
 ## 🛠️ Components
 * **Frontend**: Served on port `80`.
-* **Backend**: API running on port `5000`.
+* **Backend**: API running on port `5001`.
 * **Database**: Redis running on port `6379`.
 
 ## 📦 Automation (CI/CD)
